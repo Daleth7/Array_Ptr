@@ -144,9 +144,9 @@ class array_ptr{
             //Warnings:
             //  - Similarly to std::vector, these are slow operations
             //  - Inserting elements may change what values other array_ptr
-            //      instances will point to.
+            //      instances will point to but will never invalidate them.
             //  - Erasing elements may invalidate other instances of
-            //      array_ptr.
+            //      array_ptr if enough elements are removed.
         iterator insert(size_type, const_reference);
         iterator insert(size_type, size_type, const_reference);
         iterator insert(const iterator&, const_reference);
