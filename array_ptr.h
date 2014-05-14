@@ -185,6 +185,7 @@ class array_ptr{
             void reset(size_type = 0, U* = null);
 
 //Constructors and destructor
+        array_ptr();
         array_ptr(size_type, const_reference = value_type());
         array_ptr(size_type, pointer&);
         template <typename... ConArgs>
@@ -205,6 +206,7 @@ class array_ptr{
                         m_capacity,
                         m_pcount
             ;
+            Shared_Data();
             Shared_Data(size_type);
             ~Shared_Data();
             Shared_Data(const Shared_Data&)             = delete;

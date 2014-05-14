@@ -1,6 +1,13 @@
 //Constructors and destructor implementations
 
 __APTR_TEMPL__
+__APTR_INST__::array_ptr()
+    : m_index(0)
+    , m_junk()
+    , m_data(new Shared_Data())
+{}
+
+__APTR_TEMPL__
 __APTR_INST__::array_ptr(size_type N, const_reference filler)
     : m_index(0)
     , m_junk()
@@ -14,9 +21,8 @@ __APTR_TEMPL__
 __APTR_INST__::array_ptr(size_type N, pointer& Tptr)
     : m_index(0)
     , m_junk()
-    , m_data(new Shared_Data(1))
+    , m_data(new Shared_Data())
 {
-    delete[] m_data->m_array;
     m_data->m_array = Tptr;
     m_data->m_length = m_data->m_capacity = N;
     Tptr = null;
@@ -48,7 +54,7 @@ __APTR_TEMPL__
 __APTR_INST__::array_ptr(const __APTR_INST__& orig)
     : m_index(orig.m_index)
     , m_junk()
-    , m_data(nullptr)
+    , m_data(null)
 {copy_data(orig.m_data);}
 
 __APTR_TEMPL__
@@ -63,14 +69,14 @@ __APTR_INST__::array_ptr(__APTR_INST__&& orig)
     : m_index(orig.m_index)
     , m_junk()
     , m_data(orig.m_data)
-{orig.m_data = nullptr;}
+{orig.m_data = null;}
 
 __APTR_TEMPL__
 __APTR_INST__& __APTR_INST__::operator=(__APTR_INST__&& orig){
     if(m_data == orig.m_data) return *this;
     m_index = orig.m_index;
     m_data = orig.m_data;
-    orig.m_data = nullptr;
+    orig.m_data = null;
     return *this;
 }
 

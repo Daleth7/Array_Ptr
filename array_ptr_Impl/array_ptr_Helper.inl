@@ -22,4 +22,4 @@ auto __APTR_INST__::calc_new_capacity(size_type offset) const -> size_type
 
 __APTR_TEMPL__
 bool __APTR_INST__::is_valid_index(size_type pos)const
-    {return (m_data->m_array != null) && (pos < m_data->m_length-m_index);}
+    {return (m_data->m_array != null) && (pos+m_index < m_data->m_length);}

@@ -6,12 +6,12 @@
 __APTR_TEMPL__
 void __APTR_INST__::resize(size_type newsize, const_reference filler)
 {
+    if(newsize >= m_data->m_capacity)
+        this->reserve(calc_new_capacity(newsize-m_data->m_capacity));
     if(newsize <= m_data->m_length){
         while(m_data->m_length > newsize)
             m_data->m_array[--m_data->m_length] = value_type();
     }
-    if(newsize >= m_data->m_capacity)
-        this->reserve(calc_new_capacity());
     while(m_data->m_length < newsize)
         m_data->m_array[m_data->m_length++] = filler;
 }
@@ -20,12 +20,12 @@ __APTR_TEMPL__
 template <typename... ConArgs>
     void __APTR_INST__::resize(size_type newsize, ConArgs&&... params)
 {
+    if(newsize >= m_data->m_capacity)
+        this->reserve(calc_new_capacity(newsize-m_data->m_capacity));
     if(newsize <= m_data->m_length){
         while(m_data->m_length > newsize)
             m_data->m_array[--m_data->m_length] = value_type();
     }
-    if(newsize >= m_data->m_capacity)
-        this->reserve(calc_new_capacity());
     while(m_data->m_length < newsize)
         m_data->m_array[m_data->m_length++] = value_type(params...);
 }
