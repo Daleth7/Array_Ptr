@@ -17,6 +17,10 @@ auto __APTR_INST__::count() const -> size_type
     {return m_data->m_pcount;}
 
 __APTR_TEMPL__
+bool __APTR_INST__::shared_with(const __APTR_INST__& s) const
+    {return !(m_data->m_array != null) && (m_data->m_array == s.m_data->m_array);}
+
+__APTR_TEMPL__
 auto __APTR_INST__::at(size_type offset) const -> const_reference
     {return is_valid_index(offset) ? m_data->m_array[m_index+offset] : m_junk;}
 
@@ -49,7 +53,7 @@ short __APTR_INST__::compare(const __APTR_INST__& s) const
 {
     if(this == &s)
         return 0;
-    else if(m_data != s.m_data)
+    else if(m_data->m_array != s.m_data->m_array)
         return 2;
     else if(m_index < s.m_index)
         return -1;

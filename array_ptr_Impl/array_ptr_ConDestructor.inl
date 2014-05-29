@@ -8,6 +8,11 @@ __APTR_INST__::array_ptr()
 {}
 
 __APTR_TEMPL__
+__APTR_INST__::array_ptr(null_type)
+    : array_ptr()
+{}
+
+__APTR_TEMPL__
 __APTR_INST__::array_ptr(size_type N, const_reference filler)
     : m_index(0)
     , m_junk()
@@ -60,7 +65,8 @@ __APTR_INST__::array_ptr(const __APTR_INST__& orig)
 __APTR_TEMPL__
 __APTR_INST__& __APTR_INST__::operator=(const __APTR_INST__& orig){
     if(this == &orig ||m_data == orig.m_data) return *this;
-    copy_data(orig.m_data), m_index = orig.m_index;
+    copy_data(orig.m_data);
+    m_index = orig.m_index;
     return *this;
 }
 

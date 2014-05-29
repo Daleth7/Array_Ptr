@@ -94,6 +94,7 @@ class array_ptr{
     //count() returns how many instances of array_ptr
     //  are pointing to the same data.
         size_type count()                       const;
+        bool shared_with(const __APTR_INST__&)  const;
         const_reference at(size_type)           const;
         const_reference front()                 const;
         const_reference back()                  const;
@@ -108,6 +109,8 @@ class array_ptr{
 
 //Type casts
         operator void*()                        const;
+        explicit operator value_type*();
+        explicit operator value_type const*()   const;
 
 //Dereference and subscript operators
         reference operator*();
@@ -186,6 +189,7 @@ class array_ptr{
 
 //Constructors and destructor
         array_ptr();
+        array_ptr(null_type);
         array_ptr(size_type, const_reference = value_type());
         array_ptr(size_type, pointer&);
         template <typename... ConArgs>
@@ -206,6 +210,9 @@ class array_ptr{
                         m_capacity,
                         m_pcount
             ;
+
+            static size_type calc_new_capacity(size_type, size_type);
+
             Shared_Data();
             Shared_Data(size_type);
             ~Shared_Data();

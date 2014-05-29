@@ -45,6 +45,6 @@ void __APTR_INST__::reset(size_type new_size, U* src){
         return;
     this->free();
     m_data = new Shared_Data();
-    std::swap(m_data->m_array, static_cast<pointer>(src));
+    m_data->m_array = static_cast<pointer>(src);
     m_data->m_length = m_data->m_capacity = new_size;
 }

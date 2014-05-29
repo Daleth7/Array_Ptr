@@ -1,5 +1,9 @@
 //Shared_Data implementations
 
+__APTR_TEMPL__
+auto __APTR_INST__::Shared_Data::calc_new_capacity
+    (size_type old_cap, size_type offset) -> size_type
+{return (old_cap*9)/8 + offset;}
 
 __APTR_TEMPL__
 __APTR_INST__::Shared_Data::Shared_Data()
@@ -13,7 +17,7 @@ __APTR_TEMPL__
 __APTR_INST__::Shared_Data::Shared_Data(size_type newsize)
     : m_array(null)
     , m_length(newsize)
-    , m_capacity((newsize*9)/8+1)
+    , m_capacity(calc_new_capacity(newsize, 1))
     , m_pcount(1)
 {
     allocator_type alloc;

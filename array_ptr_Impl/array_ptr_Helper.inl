@@ -18,7 +18,7 @@ void __APTR_INST__::free(){
 
 __APTR_TEMPL__
 auto __APTR_INST__::calc_new_capacity(size_type offset) const -> size_type
-    {return (m_data->m_capacity*9)/8 + offset;}
+    {return Shared_Data::calc_new_capacity(m_data->m_capacity, offset);}
 
 __APTR_TEMPL__
 bool __APTR_INST__::is_valid_index(size_type pos)const
