@@ -59,6 +59,7 @@
 #include <memory>
 #include <functional>
 #include <cstddef>
+#include <initializer_list>
 
 #define __APTR_TEMPL__  \
     template <          \
@@ -192,6 +193,7 @@ class array_ptr{
         array_ptr(null_type);
         array_ptr(size_type, const_reference = value_type());
         array_ptr(size_type, pointer&);
+        array_ptr(std::initializer_list<value_type>&&);
         template <typename... ConArgs>
             array_ptr(size_type, ConArgs&&...);
         template <size_type N>

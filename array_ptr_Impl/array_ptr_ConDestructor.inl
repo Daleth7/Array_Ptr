@@ -1,5 +1,7 @@
 //Constructors and destructor implementations
 
+#include <utility>
+
 __APTR_TEMPL__
 __APTR_INST__::array_ptr()
     : m_index(0)
@@ -31,6 +33,17 @@ __APTR_INST__::array_ptr(size_type N, pointer& Tptr)
     m_data->m_array = Tptr;
     m_data->m_length = m_data->m_capacity = N;
     Tptr = null;
+}
+
+__APTR_TEMPL__
+__APTR_INST__::array_ptr(std::initializer_list<value_type>& li)
+    : m_index(0)
+    , m_junk()
+    , m_data(new Shared_Data(li.size()))
+{
+    auto iter = li.cbegin();
+    for(size_type i(0); i < m_data->m_length; ++i, ++iter)
+        m_data->m_array[i] = std::move(*iter);
 }
 
 __APTR_TEMPL__
