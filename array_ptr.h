@@ -60,6 +60,7 @@
 #include <functional>
 #include <cstddef>
 #include <initializer_list>
+#include <iterator>
 
 #define __APTR_TEMPL__  \
     template <          \
@@ -73,7 +74,9 @@ template <
     typename T,
     class Alloc = std::allocator<T>
 >
-class array_ptr{
+class array_ptr : public std::iterator
+    <std::random_access_iterator_tag, T>
+{
     public:
 //Type aliases
         using value_type        = T;
